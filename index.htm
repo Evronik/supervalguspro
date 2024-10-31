@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>ValuFix</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/reveal.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.reveal.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+
+  <script type="text/javascript">
+    var country_list = new Object();
+        country_list['RU'] = {s1: '990', s2: '290', s3: '1280', s4: '1980', curr: 'руб.'};
+        country_list['UA'] = {s1: '249', s2: '50', s3: '299', s4: '498', curr: 'грн.'};
+        function change_country(id)
+    {
+      $('.price_land_s1').text(country_list[id].s1);  
+      $('.price_land_s2').text(country_list[id].s2);  
+      $('.price_land_s3').text(country_list[id].s3);  
+      $('.price_land_s4').text(country_list[id].s4);  
+      $('.price_land_curr').text(country_list[id].curr);  
+      $('.price_field_s1').val(country_list[id].s1);  
+      $('.price_field_s2').val(country_list[id].s2);  
+      $('.price_field_s3').val(country_list[id].s3);  
+    }
+    
+    $(function(){
+      $('.country_select').change(function(){
+        change_country($(this).val());
+        $('.country_select').val($(this).val());
+      });
+      change_country('RU');  
+    }); 
+  </script>
+  
+<script type="text/javascript">
+    $(function() {
+        $('form').submit(function() {
+            $('input[name=Order[fio]]', this).val($.trim($('input[name=Order[fio]]', this).val()));
+            if(!$('input[name=Order[fio]]', this).val()) {
+                alert('Укажите корректные ФИО!');
+                return false;
+            }
+
+            var phone_val = $('input[name=Order[phone]]', this).val();
+            var reg1 = new RegExp("[^0-9]*", "g"), reg2 = new RegExp("[^0-9\-\+ \(\)]", "g");
+            var phone_txt = phone_val.replace(reg1, '');
+            
+            if(phone_val.search(reg2) != -1)
+            {
+                alert('Номер телефона может содержать только цифры, символы "+", "-", "(", ")" и пробелы');
+                return false;
+            }
+            
+            if(!phone_txt || phone_txt.length < 7) 
+            {
+                alert('В вашем телефоне слишком мало цифр!');
+                return false;
+            }
+            return true;
+        });
+        $('a.order-btn').click(function() {
+            $(this).closest('form').submit();
+            return false;
+        });
+    });
+</script>
+
+<script>
+    function disableSelect() {
+        if ($('select[name=country]').length) {
+            $('select[name=country]').attr('disabled', 'disabled');
+            $('form').append("<input type='hidden' name='country' value='RU' />");
+        }
+    }
+
+//    try {
+//        if (!enableSelect()) {
+//            disableSelect();
+//        }
+//    }
+//    catch (e) {
+//        disableSelect();
+//    }
+	$(function() {
+					if (!$('select[name=country]').length && !$('input[name=country]').length) {
+				$('form').append("<input type='hidden' name='country' value='RU' />");
+			}
+			});
+
+</script>
+
+<!-- jQuery/Modal BEGIN -->
+<link href="css/modal.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="js/modal.js"></script>
+<!-- jQuery/Modal END -->
+
+
+
+	
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+<header class="header">
+    <div class="nav-bg">
+        <div class="nav">
+            <img src="img/logo.png" alt="logo" class="logo">
+            <div class="order">
+                <p> </p>
+                <a href="#" data-reveal-id="myModal" data-animation="fade">
+                    <button class="btn1">Заказать обратный звонок</button>
+                </a>
+            </div> <!-- .order -->
+            <div id="myModal" class="reveal-modal">
+                <h1>Оставьте Ваши контактные данные и мы
+                    свяжемся с Вами в течение 15 минут</h1>
+                <form id="landing_form" action="order.php" method="post" class="x_order_form">
+                    
+                    <input type="hidden" name="s1" class="price_field_s1" value="990" />
+<input type="hidden" name="s2" class="price_field_s2" value="290" />
+<input type="hidden" name="s3" class="price_field_s3" value="1280" />
+
+                    <input name="Order[fio]" type="text" placeholder="Введите Имя" class="input_text1">
+                    <input name="Order[phone]" type="text" placeholder="Введите номер телефона" class="input_text2">
+                    <input type="submit" value="" class="input_button">
+                </form>
+                <a class="close-reveal-modal"></a>
+            </div>
+            <div class="egg">
+                <img src="img/russia.png" alt="guaranty">
+                <p><b>Доставка</b> по всей России</p>
+            </div>
+            <div class="egg">
+                <img src="img/guaranty.png" alt="guaranty">
+                <p><b>100%</b> гарантия качества</p>
+            </div>
+        </div><!-- .nav -->
+    </div> <!-- .nav-bg -->
+    <div class="title-bg">
+        <div class="title1">
+            <h1>Профессиональное "лечение косточки на ноге"</h1>
+            <h2>Результат всего за 1 месяц</h2>
+        </div> <!-- .title -->
+    </div> <!-- .title-bg -->
+    <div class="screen1">
+        <div class="doctor">
+            <ul class="advant">
+                <li>Выпрямляет большой палец и сустав</li>
+                <li>Снимает боль и припухлость</li>
+                <li>Сохраняет естественную подвижность стопы</li>
+                <li>Рассчитан на круглосуточное ношение</li>
+            </ul> <!-- .advant -->
+            <img src="img/arrow.png" alt="arrow" class="arrow">
+        </div> <!-- .doctor -->
+        <div class="form1">
+            <div class="action1">
+                <div class="bid">
+                    <div class="fifty">
+                        <div class="fifty-padding">
+                            <p class="fifty-title">Акция! Скидка 50%</p>
+                            <hr>
+                            <div class="price">
+                                <p>Полная цена:</p>
+                                <p class="cut bigPrice"><span class="price_land_s4 x_price_previous">1980</span> <span class="price_land_curr x_currency">руб.</span></p>
+                            </div>
+                            <div class="price">
+                                <p>Цена со скидкой:</p>
+                                <p class="realPrice"><span class="price_land_s1 x_price_current">990</span> <span class="price_land_curr x_currency">руб.</span></p>
+                            </div>
+                          
+                        </div> <!-- .fity-padding -->
+                    </div> <!-- .fifty -->
+                    <div class="remain">
+                        Осталось<br>товаров со скидкой<br><b>7 шт</b>
+                    </div> <!-- .remain -->
+                    <form action="order.php" method="post" class="x_order_form">
+                        
+                        
+                        <input type="hidden" name="s1" class="price_field_s1" value="990" />
+<input type="hidden" name="s2" class="price_field_s2" value="290" />
+<input type="hidden" name="s3" class="price_field_s3" value="990" />
+
+
+
+
+
+                        <input type="text" name="Order[fio]" class="make-order" placeholder="Введите Имя">
+                        <input type="text" name="Order[phone]" class="make-order" placeholder="Введите номер телефона">
+                        <input type="submit" value="Закажите со скидкой" class="orderBtn">
+                    </form> <!-- .form-make-order -->
+                </div> <!-- .bid -->
+            </div>
+        </div> <!-- .form1 -->
+    </div> <!-- .screen1 -->
+</header><!-- .header-->
+<div class="wrapper clearfix">
+<div class="screen2">
+    <h1 class="screen-h1">Что такое <em>фиксатор Валюфикс<sup>&#9415;</sup>?</em></h1>
+    <div class="screen2-text">
+        <b>Валюфикс &#9415;</b> является разработкой института Фраунгофера в Германии. Созданная совместными усилиями ученых и ведущих немецких врачей ортопедов, шина <b>Валюфикс &#9415;</b>  учитывает все аспекты биомеханики стопы.<br><br>
+        Главное отличие этой шины в том, что коррекция направлена не только на выпрямление большого пальца, но и на борьбу с поперечным плоскостопием. Таким образом, <b>Валюфикс &#9415;</b> борется не только с "косточкой", но и с причиной, вызывающей её появление.
+    </div> <!-- .screen2-text -->
+    <div class="screen2-tip">
+        Сохраняет анатомическую подвижность
+    </div> <!-- .screen2-tip -->
+</div> <!-- .screen2 -->
+<img src="img/arrow2.png" alt="arrow" class="arrow2">
+<div class="screen3">
+    <h1 class="screen-h1">Почему Валюфикс<sup>&#9415;</sup><em> так эффективен?</em></h1>
+    <p class="sc3-text1">
+        Посмотрите видео о том, как это работает, как пользоваться ”Валюфикс”<br>и какие гарантии мы даем
+    </p>
+    <p class="sc3-text2">
+        Говорит директор ООО “Вальгус и Халлюкс” Егор Гончаров
+    </p>
+    <div class="youtube">
+        <div>
+           <video src="../../www.youtube.com/watch@v=Q533j3kkjNw" controls="controls" autoplay>                                                      </div>
+    </div> <!-- .youtube -->
+    <button class="orderBtn scroll-to-order">Закажите со скидкой</button>
+</div> <!-- .screen3 -->
+<div class="screen4-1">
+    <h1 class="screen-h1">В чём реальная причина <em>возникновения Hallux Valgus?</em></h1>
+    <div class="move-down">
+        <img src="img/foot.png" alt="foot" class="sc4-1-foot">
+        <div class="sc4-1-text">
+            <p class="sc4-1-first">
+                Более половины всех людей на планете сталкиваются с проблемой, которую называют ”болезненной косточкой на ноге”. Также, многие люди считают эту проблему подагрой и видят причину заболевания в отложении солей и неправильном обмене веществ.
+            </p>
+            <p class="sc4-1-second">
+                Такое мнение ошибочно. Болезненные ощущения в области большого пальца обусловлены деформацией стопы – поперечным плоскостопием, в результате которого происходит  распластанность плюсневых костей (расширение передней части стопы) и отклонение большого пальца внутрь (вальгусное отклонение)
+            </p>
+        </div> <!-- .sc4-1-text -->
+    </div>
+</div> <!-- .screen4-1 -->
+<div class="screen4-2">
+    <div class="stamp-text">
+        Эффективность доказана клинически
+    </div>
+    <div class="foot-info">
+        <p>Фиксация</p>
+        <p>Плюсневая подкладка</p>
+        <p>Шарнир,<br>сохраняющий подвижность</p>
+        <p>Пальцевая повязка</p>
+    </div> <!-- .foot-info -->
+    <ul class="foot-check">
+        <li><b>Валюфикс &#9415;</b> возвращает стопе природную форму, предохраняет и снимает болезненную опухоль</li>
+        <li>Шина выпрямляет сдавленные и искривленные мягкие части основного сустава большого пальца, а также исправляет развивающееся искривление</li>
+        <li>При помощи специальной конструкции шины, плюсневой подкладки и пальцевой повязки стабилизируется положение стопы и регулируется ее правильная нагрузка</li>
+        <li>С применением шины <b>Валюфикс &#9415;</b> стопа деформированная Hallux valgus двигается естественно и без боли</li>
+        <li>Эффективно избавляет от поперечного плоскостопия, которое является частым спутником искривления большого пальца.</li>
+    </ul>
+</div> <!-- .screen4-2 -->
+<div class="form2">
+    <div class="green">
+        <div class="fifty-padding">
+            <p class="fifty-title">Спешите, Акция! Скидка 50%</p>
+            <hr>
+           <div class="price">
+				<p>Полная цена:</p>
+				<p class="cut bigPrice"><span class="price_land_s4 x_price_previous">1980</span> <span class="price_land_curr x_currency">руб.</span></p>
+			</div>
+			<div class="price">
+				<p>Цена со скидкой:</p>
+				<p class="realPrice"><span class="price_land_s1 x_price_current">990</span> <span class="price_land_curr x_currency">руб.</span></p>
+			</div>
+			<div class="total-price">
+				<p>Итоговая цена: <span class="totalPrice"><span class="price_land_s3 x_price_total">1280</span> <span class="price_land_curr x_currency">руб.</span></span> включая доставку</p>
+			</div>
+        </div> <!-- .fity-padding -->
+    </div> <!-- .green -->
+    <div class="rest">
+        <div class="flower"><p>7<em>шт</em></p></div>
+        <div class="rest-text">Осталось товаров<br>со скидкой</div>
+        <button class="orderBtn orderBtn2 scroll-to-order">Закажите со скидкой</button>
+    </div>
+</div> <!-- .form2 -->
+<div class="screen5">
+    <h1 class="screen-h1">5 причин <em>почему Валюфикс<sup>&#9415;</sup> лучше других средств</em></h1>
+    <img src="img/sc5-stamp.png" alt="stamp" class="sc5-stamp">
+    <div class="sc5-container">
+        <div class="methods">
+            <div class="methods-title">
+                Другие средства
+            </div>
+            <ul class="methods-list">
+                <li>Оказывают лишь временный эффект</li>
+                <li>Полностью или частично фиксируют сустав, ограничивая его подвижность</li>
+                <li>Лишь приостанавливают прогресс суставной деформации</li>
+                <li>Имеют ограничения при ношении, не всегда подходят к обуви</li>
+                <li>Дорогостоящи могут вызывать дискомфорт во время использования</li>
+            </ul>
+        </div>
+        <div class="methods">
+            <div class="methods-title good">
+                Валюфикс
+            </div>
+            <ul class="methods-list methods-good">
+                <li>Оказывает стойкий, долговременный эффект</li>
+                <li>Не препятствует подвижности сустава </li>
+                <li>Предотвращает дальнейшее прогрессирование деформации сустава</li>
+                <li>Работает 24 часа в сутки, подходит к большинству видов обуви</li>
+                <li>Доступнее и проще в использовании, чем большинство аналогичных устройств</li>
+            </ul>
+        </div>
+        <img src="img/arrow3.png" alt="arrow" class="arrow3">
+    </div>
+</div> <!-- .screen5 -->
+<div class="screen5 screen6">
+    <h1 class="screen-h1">15 000 наших клиентов<em> уже оценили прелесть Валюфикс<sup>&#9415;</sup></em></h1>
+    <div class="client-box">
+        <div class="avatar">
+            <img src="img/client1.png" alt="client" class="client-avatar">
+        </div>
+        <p class="client-name">Анна, 42 года, Нижний Новгород</p>
+        <p class="client-text">С детства имею проблемы с ногами из-за плоскостопия, последние годы практически не ношу любимые раньше каблуки из-за роста ”косточек” на ногах((( По совету подруги воспользовалась инновационным фиксатором ”Валюфикс”. Прекрасный фиксатор - совершенно не трет, а результат, просто супер. За месяц у меня восстановилась форма сустава и прошли боли.</p> <!-- .client-text -->
+    </div> <!-- .client-box -->
+    <div class="client-feet">
+        <div>
+            <img src="img/before1.png" alt="before">
+        </div>
+        <div>
+            <img src="img/after1.png" alt="after">
+        </div>
+    </div> <!-- .client-feet -->
+    <div class="client-box">
+        <div class="avatar">
+            <img src="img/client2.png" alt="client" class="client-avatar">
+        </div>
+        <p class="client-name">Светлана, 45 лет, Тамбов</p>
+        <p class="client-text">Страдала косточкой на ноге более 7 лет и за это время успела проверить на собственном опыте, что никакие лекарства не помогают. Наилучшие результаты дало ежедневне ношение ортопедического фиксатора ”Валюфикс”. Это устройство очень простое в использовании, смягчает нагрузку при ходьбе и не стесняет движений в любой обуви. Уже через 3 недели состояние ”косточки” значительно улучшилось!</p> <!-- .client-text -->
+    </div> <!-- .client-box -->
+    <div class="client-feet">
+        <div>
+            <img src="img/before2.png" alt="before">
+        </div>
+        <div>
+            <img src="img/after2.png" alt="after">
+        </div>
+    </div> <!-- .client-feet -->
+    <div class="client-box">
+        <div class="avatar">
+            <img src="img/client3.png" alt="client" class="client-avatar">
+        </div>
+        <p class="client-name">Жанна, 48 лет, Новороссийск</p>
+        <p class="client-text">У меня косточка на правой ноге. Что я только не пробовала: начала делать массаж, физиопроцедуры, носила ужасные бандажи и выпрямители, ездила по клиниками - ничего не помогало. Всё изменилось после того, как я узнала о ”Валюфикс”. По сравнению с затратами на моё лечение, этот фиксатор стоит копейки, а результат - через две недели! Очень комфортен, лучшего ортопедического средства я пока не встречала!</p> <!-- .client-text -->
+    </div> <!-- .client-box -->
+    <div class="client-feet">
+        <div>
+            <img src="img/before3.png" alt="before">
+        </div>
+        <div>
+            <img src="img/after3.png" alt="after">
+        </div>
+    </div> <!-- .client-feet -->
+    <div class="form2">
+        <div class="green">
+            <div class="fifty-padding">
+                <p class="fifty-title">Спешите, Акция! Скидка 50%</p>
+                <hr>
+               <div class="price">
+					<p>Полная цена:</p>
+					<p class="cut bigPrice"><span class="price_land_s4 x_price_previous">1980</span> <span class="price_land_curr x_currency">руб.</span></p>
+				</div>
+				<div class="price">
+					<p>Цена со скидкой:</p>
+					<p class="realPrice"><span class="price_land_s1 x_price_current">990</span> <span class="price_land_curr x_currency">руб.</span></p>
+				</div>
+				<div class="total-price">
+					<p>Итоговая цена: <span class="totalPrice"><span class="price_land_s3 x_price_total">1280</span> <span class="price_land_curr x_currency">руб.</span></span> включая доставку</p>
+				</div>
+            </div> <!-- .fity-padding -->
+        </div> <!-- .green -->
+        <div class="rest">
+            <div class="flower"><p>7<em>шт</em></p></div>
+            <div class="rest-text">Осталось товаров<br>со скидкой</div>
+            <button class="orderBtn orderBtn2 scroll-to-order">Закажите со скидкой</button>
+        </div>
+    </div> <!-- .form2 -->
+</div> <!-- .screen5  the second-->
+<div class="screen5 screen7">
+    <h1 class="screen-h1">Что вы получите <em>заказав Валюфикс<sup>&#9415;</sup>?</em></h1>
+    <img src="img/arrow2.png" alt="arrow" class="arrow4">
+    <div class="sc7-box">
+        <ul class="you-get">
+            <li>Здоровые, красивые ноги</li>
+            <li>Без врачей и операций</li>
+            <li>Эффект, который останется с вами навсегда</li>
+            <li>Эффективное воздействие за минимальную цену</li>
+        </ul>
+    </div>
+</div> <!-- .screen5 the third -->
+<div class="screen8">
+    <h1 class="screen-h1">Почему стоит заказать <em>Валюфикс<sup>&#9415;</sup> именно у нас?</em></h1>
+    <div class="three">
+        <div class="why-box">
+            <img src="img/why-phone.png" alt="phone">
+            <p class="why-title">Удобное и быстрое оформление заказа</p>
+            <p class="why-text">Оформите заявку на сайте или закажите обратный звонок. Мы сами свяжемся с вами и отправим Ваш товар наиболее удобным для Вас способом.</p>
+        </div> <!-- .why-box -->
+        <div class="why-box">
+            <img src="img/gift.png" alt="phone">
+            <p class="why-title">Акции и подарки от магазина</p>
+            <p class="why-text">Оформите заявку у нас и помимо привлекательной скидки 50%, мы порадуем Вас акциями и подарками. Без подарка не останется никто!</p>
+        </div> <!-- .why-box -->
+        <div class="why-box">
+            <img src="img/car.png" alt="phone">
+            <p class="why-title">Мы заботимся о своей репутации</p>
+            <p class="why-text">Поэтому, перед отправкой, мы тщательно проверяем весь товар на техническую пригодность и <br>комплектацию. </p>
+        </div> <!-- .why-box -->
+    </div> <!-- .three -->
+</div> <!-- .screen8 -->
+<div class="screen9">
+    <h1 class="screen-h1">Наша команда Валюфикс<sup>&#9415;</sup><em> всегда на связи</em></h1>
+    <div class="sc9-box">
+        <div class="worker">
+            <img src="img/worker1.png" alt="worker" class="worker-img">
+            <p class="worker-name">Ольга</p>
+            <p class="worker-fun">Акционные предложения</p>
+        </div> <!-- .worker -->
+        <div class="worker">
+            <img src="img/worker2.png" alt="worker" class="worker-img">
+            <p class="worker-name">Татьяна</p>
+            <p class="worker-fun">Вопросы по использованию</p>
+        </div> <!-- .worker -->
+        <div class="worker">
+            <img src="img/worker3.png" alt="worker" class="worker-img">
+            <p class="worker-name">Кирилл</p>
+            <p class="worker-fun">Менеджер по доставке</p>
+        </div> <!-- .worker -->
+        <div class="worker">
+            <img src="img/worker4.png" alt="worker" class="worker-img">
+            <p class="worker-name">Вероника</p>
+            <p class="worker-fun">Прием оптовых заказов</p>
+        </div> <!-- .worker -->
+    </div> <!-- .sc9-box -->
+</div> <!-- .screen9 -->
+<div class="try">
+    <div class="form2 bottom-form">
+        <div class="green">
+            <div class="fifty-padding">
+                <p class="fifty-title">Спешите, Акция! Скидка 50%</p>
+                <hr>
+			<div class="price">
+				<p>Полная цена:</p>
+				<p class="cut bigPrice"><span class="price_land_s4 x_price_previous">1980</span> <span class="price_land_curr x_currency">руб.</span></p>
+			</div>
+			<div class="price">
+				<p>Цена со скидкой:</p>
+				<p class="realPrice"><span class="price_land_s1 x_price_current">990</span> <span class="price_land_curr x_currency">руб.</span></p>
+			</div>
+		
+            </div> <!-- .fity-padding -->
+        </div> <!-- .green -->
+        <a name="order_form"></a>
+        <div class="bottom-order" style="position: relative; z-index: 999;">
+            <form action="order.php" method="post" class="x_order_form">
+                
+                
+                <input type="hidden" name="s1" class="price_field_s1" value="990" />
+<input type="hidden" name="s2" class="price_field_s2" value="290" />
+<input type="hidden" name="s3" class="price_field_s3" value="990" />
+                
+			
+                <input type="text" name="Order[fio]" class="make-order" placeholder="Введите Имя">
+                <input type="text" name="Order[phone]" class="make-order" placeholder="Введите номер телефона">
+                <input type="submit" value="Закажите со скидкой" class="orderBtn">
+            </form> <!-- .form-make-order -->
+        </div> <!-- .bottom-order -->
+    </div> <!-- .form2 -->
+	<div style="clear: both;"></div>
+</div> <!-- .try -->
+
+</div><!-- .wrapper -->
+<footer class="footer clearfix">
+    <div class="footer-box clearfix">
+        <img src="img/arrow4.png" class="arrow5" alt="arrow">
+        <div class="footer-remain">
+            <div class="flower"><p>7<em>шт</em></p></div>
+            <div>Осталось<br>товаров со скидкой</div>
+        </div> <!-- .remain -->
+        <div class="copyright">
+            <div class="cpr-name" align="center">
+
+                       <div style="padding:50px 0px 0px 0px; text-align: center;">
+                         <div style="padding:20px 0;text-align:center;">
+    ООО "СП ШОП" ИНН 7702895697/ КПП 770202002 ОГРН 1107747903524 105094 г. Москва, наб. Семеновская, д. 2/1, стр. 2<br />
+    <a href="#" modal="polit">Политика конфиденциальности</a>
+    </div></div>
+        </div>
+        <a href="img/doc.jpg" class="doc" target="_blank"></a>
+    </div> <!-- .footer-box -->
+</footer><!-- .footer -->
+
+<div id="polit" class="modal">
+    <div class="modal-block">
+        <div class="icon-close"></div>
+        <div class="title">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</div>
+        <div class="content">
+            <div class="padding">
+                <p>Наш интернет-магазин уважительно относится к правам клиента. Соблюдается строгая конфиденциальность
+                    при оформлении заказа. Сведения надёжно сохраняются и защищены от передачи. </p>
+
+                <p>Согласием на обработку данных клиента исключительно с целью оказания услуг является размещение заказа
+                    на сайте. </p>
+
+                <p>К персональным данным относится личная информация о клиенте: домашний адрес; имя, фамилия, отчество;
+                    сведения о рождении; имущественное, семейное положение; личные контакты (телефон, электронная почта)
+                    и прочие сведения, которые
+
+                    перечислены в Законе РФ № 152-ФЗ «О персональных данных» от 27 июля 2006 г. </p>
+
+                <p>Клиент вправе отказаться от обработки персональных данных. Нами в данном случае гарантируется
+                    удаление с сайта всех персональных данных в трёхдневный срок в рабочее время. Подобный отказ клиент
+                    может оформить простым электронным
+
+                    письмом на адрес, указанный на странице нашего сайта. </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="kmacb-form" class="modal">
+    <div class="modal-block">
+        <div class="icon-close"></div>
+        <div class="title">Понравилось это предложение?</div>
+        <div class="content">
+            <div class="padding">
+                <p>Мы расскажем Вам все об этом товаре, предложим наилучшие условия и ознакомим с подходящими акционными предложениями!</p>
+               <form method="POST" action="order.php">
+                    <input type="text" name="Order[fio]" value="" placeholder="Ваше имя" />
+                    <input type="text" name="Order[phone]" value="" placeholder="Ваш номер телефона" /><br>
+                    <input type="submit" value="ПЕРЕЗВОНИТЬ МНЕ" />
+                    <input type="hidden" name="s1" class="price_field_s1" value="990" />
+                    <input type="hidden" name="s2" class="price_field_s2" value="290" />
+                    <input type="hidden" name="s3" class="price_field_s3" value="990" />
+                </form> 
+                <p class="bold">Оператор перезвонит Вам через 15-30 минут</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript"><!--
+    //-->
+</script>
+
+    <script src="../../https@ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<div style="opacity: 0; position: absolute; top: -999px; left: -999px;">
+        
+        
+            </div>
+
+</body>
+</html> 
